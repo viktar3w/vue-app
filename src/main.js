@@ -1,16 +1,17 @@
 import {createApp} from 'vue';
 
+import router from './router.js';
+import store from "@/store";
 import App from './App.vue';
-import ActiveElement from './components/ActiveElement.vue';
-import KnowledgeBase from './components/KnowledgeBase.vue';
-import KnowledgeElement from './components/KnowledgeElement.vue';
-import KnowledgeGrid from './components/KnowledgeGrid.vue';
+import BaseCard from "@/components/ui/BaseCard.vue";
+import BaseBadge from "@/components/ui/BaseBadge.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.component('active-element', ActiveElement);
-app.component('knowledge-base', KnowledgeBase);
-app.component('knowledge-element', KnowledgeElement);
-app.component('knowledge-grid', KnowledgeGrid);
-
+app.use(router);
+app.use(store);
+app.component('base-card', BaseCard)
+app.component('base-badge', BaseBadge)
+app.component('base-button', BaseButton)
 app.mount('#app');
