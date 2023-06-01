@@ -18,6 +18,7 @@
 export default {
   data() {
     return {
+      error: null,
       email: {
         val: '',
         isValid: true
@@ -44,7 +45,7 @@ export default {
         this.isFormValid = false
       }
     },
-    sendMessage() {
+    async sendMessage() {
       this.validate()
       if (!this.isFormValid) {
         return
@@ -54,7 +55,11 @@ export default {
         message: this.message.val,
         coachId: this.$route.params.id
       }
-      this.$store.dispatch('requests/contactCoach', messageData)
+      try {
+        await this.$store.dispatch('requests/contactCoach', messageData)
+      } catch (error) {
+        this.error = error.message || 'Something was wrong!'
+      }
       this.$router.replace('/coaches')
     }
   }
