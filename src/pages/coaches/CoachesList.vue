@@ -1,31 +1,33 @@
 <template>
-  <base-dialog :show="!!error"
-               title="An error occurred!" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <coach-filter @change-filter="setFilters"></coach-filter>
-  </section>
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
-        <base-button v-if="!isCoach && !isLoading" link to="/register">Register</base-button>
-      </div>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-if="hasCoaches">
-        <coach-item v-for="coach in filteredCoaches" :key="coach.id"
-                    :lastName="coach.lastName"
-                    :areas="coach.areas"
-                    :id="coach.id"
-                    :rate="coach.hourlyRate"
-                    :firstName="coach.firstName"></coach-item>
-      </ul>
-      <h3 v-else>No Coaches List</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error"
+                 title="An error occurred!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <coach-filter @change-filter="setFilters"></coach-filter>
+    </section>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
+          <base-button v-if="!isCoach && !isLoading" link to="/register">Register</base-button>
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-if="hasCoaches">
+          <coach-item v-for="coach in filteredCoaches" :key="coach.id"
+                      :lastName="coach.lastName"
+                      :areas="coach.areas"
+                      :id="coach.id"
+                      :rate="coach.hourlyRate"
+                      :firstName="coach.firstName"></coach-item>
+        </ul>
+        <h3 v-else>No Coaches List</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 <script>
 import CoachItem from "@/components/coaches/CoachItem";
