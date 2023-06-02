@@ -1,7 +1,8 @@
 const firebaseUrl = 'https://vue-http-demo-ac11d-default-rtdb.europe-west1.firebasedatabase.app/coaches'
 export default {
     async registerCoach(context, coach) {
-        const userId = context.rootGetters.userId
+        const userId = context.rootGetters["auth/userId"]
+        const token = context.rootGetters["auth/token"]
         const coachData = {
             firstName: coach.first,
             lastName: coach.last,
@@ -9,7 +10,7 @@ export default {
             description: coach.desc,
             hourlyRate: coach.rate
         }
-        const response = await fetch(`${firebaseUrl}/${userId}.json`, {
+        const response = await fetch(`${firebaseUrl}/${userId}.json?auth=${token}`, {
             method: "PUT",
             body: JSON.stringify(coachData)
         })

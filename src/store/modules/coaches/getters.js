@@ -7,8 +7,8 @@ export default {
     },
     isCoach(_, getters, _2, rootGetters) {
         const coaches = getters.coaches ?? []
-        const userId = rootGetters.userId
-        return coaches.some((coach) => coach.userId === userId)
+        const userId = rootGetters["auth/userId"]
+        return coaches.some((coach) => coach.id === userId)
     },
     shouldUpdate(state) {
         const lastFetch = state.lastFetch

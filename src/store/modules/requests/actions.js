@@ -18,8 +18,9 @@ export default {
         context.commit('addRequest', newRequest)
     },
     async fetchRequests(context) {
-        const couchId = context.rootGetters.userId
-        const request = await fetch(`${firebaseUrl}/${couchId}.json`)
+        const couchId = context.rootGetters["auth/userId"]
+        const token = context.rootGetters["auth/token"]
+        const request = await fetch(`${firebaseUrl}/${couchId}.json?auth=${token}`)
         const responseData = await request.json()
         if (!request.ok) {
             throw new Error(responseData.message || 'Fetch "fetchRequests" was failed!')
