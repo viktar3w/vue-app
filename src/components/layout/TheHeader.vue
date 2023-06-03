@@ -12,7 +12,7 @@
           <router-link to="/requests">Requests</router-link>
         </li>
         <li v-else>
-          <router-link to="/auth">Login</router-link>
+          <router-link to="/auth?redirect=register">Login</router-link>
         </li>
         <li v-if="isLoggedIn">
           <base-button @click="logout">Logout</base-button>
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("auth/logout")
+      this.$store.dispatch("auth/autoLogout")
     }
   }
 }

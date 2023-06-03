@@ -78,6 +78,8 @@ export default {
           email: this.email.val,
           password: this.password.val
         })
+        const redirectUrl = "/" + (this.$route.query.redirect || 'coaches')
+        this.$router.replace(redirectUrl)
       } catch (e) {
         this.error = e.message || "Something was wrong!!!"
       }
